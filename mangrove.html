@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mangrove Library</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+:root{--green:#14532d;--light:#dcfce7;--lime:#86efac;--text:#183b2a}
+body{font-family:Arial,sans-serif;background:#f0fdf4;color:var(--text);transition:.3s}
+body.dark{background:#10251a;color:#e5ffe9}
+nav{background:var(--green);color:white;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:1000;flex-wrap:wrap;gap:12px}
+.logo{font-size:21px;font-weight:bold}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}
+button{cursor:pointer;border:none;border-radius:9px;padding:10px 14px;font-weight:bold}
+.navlinks button{background:transparent;color:white}
+.navlinks button:hover,.navlinks button.active{background:#2f855a}
+.hero{min-height:440px;padding:70px 8%;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;background:linear-gradient(135deg,#14532d,#166534,#4d7c0f);color:white;overflow:hidden}
+.hero-text{flex:1;min-width:250px}
+.hero h1{font-size:clamp(35px,6vw,60px);margin-bottom:20px}
+.hero p{font-size:17px;line-height:1.8;max-width:550px}
+.hero button{background:var(--lime);color:#14532d;margin-top:25px;padding:14px 20px}
+.tree{font-size:130px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.container{width:90%;max-width:1100px;margin:auto;padding:45px 0}
+.page{display:none;animation:appear .4s ease}
+.page.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+h2{font-size:30px;margin-bottom:18px;color:#15803d}
+.dark h2{color:#86efac}
+.intro{line-height:1.8;margin-bottom:25px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:25px}
+.card{background:white;padding:25px;border-radius:17px;box-shadow:0 5px 20px #14532d12;transition:.3s;border:1px solid #dcfce7}
+.dark .card{background:#193b29;border-color:#28553b}
+.card:hover{transform:translateY(-7px);box-shadow:0 12px 25px #14532d22}
+.card .icon{font-size:40px;margin-bottom:15px}
+.card h3{margin-bottom:10px}
+.card p{line-height:1.7}
+.searchbox{width:100%;max-width:500px;padding:14px;border:2px solid #bbf7d0;border-radius:10px;margin:15px 0;font-size:16px}
+.eco-box{background:#dcfce7;border-radius:15px;padding:25px;margin-top:20px;line-height:1.9}
+.dark .eco-box{background:#193b29}
+.quiz{margin-top:30px;padding:25px;border-radius:15px;background:white;border:1px solid #bbf7d0}
+.dark .quiz{background:#193b29}
+.quiz button{display:block;width:100%;text-align:left;background:#dcfce7;margin:10px 0;color:#14532d}
+.quiz button:hover{background:#86efac}
+#hasil,#hasil2{margin-top:15px;font-weight:bold}
+footer{background:#14532d;color:white;text-align:center;padding:25px;line-height:1.8}
+@media(max-width:600px){nav{justify-content:center}.navlinks{justify-content:center}.hero{padding:50px 7%;text-align:center;justify-content:center}.tree{font-size:90px}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">🌿 Mangrove Library</div>
+  <div class="navlinks">
+    <button class="active" data-page="home">Home</button>
+    <button data-page="pengertian">Pengertian</button>
+    <button data-page="manfaat">Manfaat</button>
+    <button data-page="ekosistem">Ekosistem</button>
+    <button data-page="kuis">Kuis</button>
+    <button id="darkBtn" aria-label="Ganti tema">🌙</button>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-text">
+    <h1>Jelajahi Dunia Mangrove 🌱</h1>
+    <p>Kenali hutan mangrove, pelajari manfaatnya, dan temukan alasan mengapa ekosistem ini sangat penting bagi kehidupan di bumi.</p>
+    <button id="mulaiBtn">Mulai Menjelajah →</button>
+  </div>
+  <div class="tree" aria-hidden="true">🌳</div>
+</section>
+<main class="container">
+  <section id="home" class="page active">
+    <h2>Selamat Datang!</h2>
+    <p class="intro">Mangrove Library adalah website edukasi untuk mengenal hutan mangrove, fungsi ekologisnya, dan perannya dalam menjaga wilayah pesisir. Yuk, jelajahi berbagai materi di bawah ini!</p>
+    <div class="cards">
+      <div class="card"><div class="icon">🌱</div><h3>Apa Itu Mangrove?</h3><p>Kenali tumbuhan yang mampu hidup di lingkungan pesisir yang dipengaruhi pasang surut.</p><br><button data-goto="pengertian">Pelajari →</button></div>
+      <div class="card"><div class="icon">🌊</div><h3>Manfaat Mangrove</h3><p>Pelajari bagaimana mangrove membantu melindungi pantai dan mendukung kehidupan.</p><br><button data-goto="manfaat">Pelajari →</button></div>
+      <div class="card"><div class="icon">🐟</div><h3>Ekosistem Mangrove</h3><p>Temukan berbagai organisme yang hidup dan bergantung pada habitat mangrove.</p><br><button data-goto="ekosistem">Pelajari →</button></div>
+    </div>
+  </section>
+  <section id="pengertian" class="page">
+    <h2>🌿 Pengertian Mangrove</h2>
+    <p class="intro">Mangrove adalah kelompok tumbuhan yang beradaptasi untuk hidup di wilayah pesisir, terutama daerah berlumpur yang dipengaruhi oleh pasang surut air laut. Tumbuhan ini memiliki adaptasi khusus untuk menghadapi kadar garam, kondisi tanah, dan ketersediaan oksigen yang berbeda dari lingkungan daratan biasa.</p>
+    <div class="eco-box"><h3>🌱 Ciri-Ciri Mangrove</h3><p>• Tumbuh di wilayah pesisir dan muara.</p><p>• Sebagian jenis memiliki akar tunjang atau akar napas.</p><p>• Mampu beradaptasi dengan kondisi lingkungan yang dipengaruhi air laut.</p><p>• Menjadi habitat berbagai jenis hewan.</p></div>
+    <div class="cards">
+      <div class="card"><div class="icon">🌳</div><h3>Bakau</h3><p>Beberapa jenis bakau memiliki akar tunjang yang membantu menopang tumbuhan di tanah berlumpur.</p></div>
+      <div class="card"><div class="icon">🍃</div><h3>Adaptasi</h3><p>Berbagai jenis mangrove memiliki cara berbeda untuk menghadapi salinitas dan kondisi tanah pesisir.</p></div>
+    </div>
+  </section>
+  <section id="manfaat" class="page">
+    <h2>🌏 Manfaat Hutan Mangrove</h2>
+    <p class="intro">Hutan mangrove memberikan manfaat ekologis, sosial, dan ekonomi bagi lingkungan pesisir maupun masyarakat di sekitarnya.</p>
+    <input type="text" id="cariManfaat" class="searchbox" placeholder="🔍 Cari manfaat mangrove..." aria-label="Cari manfaat mangrove">
+    <div class="cards" id="daftarManfaat">
+      <div class="card"><div class="icon">🌊</div><h3>Melindungi Pantai</h3><p>Akar dan vegetasi mangrove membantu mengurangi energi gelombang serta menahan sedimen.</p></div>
+      <div class="card"><div class="icon">🐠</div><h3>Habitat Hewan</h3><p>Menjadi tempat berlindung, mencari makan, dan berkembang biak bagi berbagai organisme.</p></div>
+      <div class="card"><div class="icon">🌍</div><h3>Menyimpan Karbon</h3><p>Ekosistem mangrove dapat menyimpan karbon dalam biomassa dan tanahnya.</p></div>
+      <div class="card"><div class="icon">💧</div><h3>Menjaga Ekosistem</h3><p>Mendukung rantai makanan dan membantu menjaga keseimbangan lingkungan pesisir.</p></div>
+      <div class="card"><div class="icon">👨‍👩‍👧</div><h3>Mendukung Masyarakat</h3><p>Mendukung mata pencaharian melalui perikanan dan wisata alam yang dikelola berkelanjutan.</p></div>
+      <div class="card"><div class="icon">🌱</div><h3>Mengurangi Erosi</h3><p>Akar mangrove membantu mengikat sedimen dan dapat mengurangi pengikisan pantai.</p></div>
+    </div>
+  </section>
+  <section id="ekosistem" class="page">
+    <h2>🐟 Ekosistem Mangrove</h2>
+    <p class="intro">Ekosistem mangrove merupakan tempat hidup berbagai tumbuhan, hewan, dan mikroorganisme yang saling berinteraksi.</p>
+    <div class="cards">
+      <div class="card"><div class="icon">🦀</div><h3>Kepiting</h3><p>Kepiting memanfaatkan habitat mangrove untuk mencari makan dan berlindung.</p></div>
+      <div class="card"><div class="icon">🐟</div><h3>Ikan</h3><p>Daerah mangrove dapat menjadi tempat pembesaran bagi berbagai jenis ikan.</p></div>
+      <div class="card"><div class="icon">🐦</div><h3>Burung</h3><p>Berbagai burung menggunakan kawasan mangrove untuk mencari makan atau beristirahat.</p></div>
+      <div class="card"><div class="icon">🦐</div><h3>Udang</h3><p>Perairan sekitar mangrove menyediakan makanan dan habitat bagi sejumlah jenis udang.</p></div>
+    </div>
+    <div class="eco-box"><h3>💚 Cara Menjaga Mangrove</h3><p>✓ Tidak membuang sampah sembarangan.</p><p>✓ Mengikuti kegiatan penanaman dengan pendampingan yang tepat.</p><p>✓ Menjaga tumbuhan dan satwa di kawasan mangrove.</p><p>✓ Mendukung pemanfaatan pesisir yang berkelanjutan.</p></div>
+  </section>
+  <section id="kuis" class="page">
+    <h2>🧠 Kuis Mangrove</h2><p class="intro">Yuk, uji pemahamanmu tentang hutan mangrove!</p>
+    <div class="quiz"><h3>1. Di mana mangrove umumnya tumbuh?</h3>
+      <button data-answer="salah">A. Gurun pasir</button><button data-answer="benar">B. Wilayah pesisir</button><button data-answer="salah">C. Pegunungan bersalju</button><p id="hasil" aria-live="polite"></p>
+    </div>
+    <div class="quiz"><h3>2. Apa salah satu manfaat mangrove?</h3>
+      <button data-answer="salah">A. Menambah sampah laut</button><button data-answer="salah">B. Merusak habitat ikan</button><button data-answer="benar">C. Membantu melindungi pantai</button><p id="hasil2" aria-live="polite"></p>
+    </div>
+  </section>
+</main>
+<footer><h3>🌿 Mangrove Library</h3><p>Belajar hari ini, menjaga alam untuk masa depan.</p><p>Website Edukasi Lingkungan | 2026</p></footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  function bukaHalaman(nama) {
+    document.querySelectorAll(".page").forEach(item => item.classList.remove("active"));
+    document.querySelectorAll("[data-page]").forEach(btn => btn.classList.remove("active"));
+    const tujuan = document.getElementById(nama);
+    if (tujuan) {
+      tujuan.classList.add("active");
+      const tombolAktif = document.querySelector('[data-page="' + nama + '"]');
+      if (tombolAktif) tombolAktif.classList.add("active");
+      window.scrollTo({top: 0, behavior: "smooth"});
+    }
+  }
+  document.querySelectorAll("[data-page]").forEach(tombol => tombol.addEventListener("click", () => bukaHalaman(tombol.dataset.page)));
+  document.querySelectorAll("[data-goto]").forEach(tombol => tombol.addEventListener("click", () => bukaHalaman(tombol.dataset.goto)));
+  document.getElementById("mulaiBtn").addEventListener("click", () => bukaHalaman("pengertian"));
+  document.getElementById("darkBtn").addEventListener("click", function () {
+    document.body.classList.toggle("dark");
+    this.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+  });
+  const kolomCari = document.getElementById("cariManfaat");
+  kolomCari.addEventListener("input", function () {
+    const kata = kolomCari.value.toLowerCase();
+    document.querySelectorAll("#daftarManfaat .card").forEach(card => {
+      card.style.display = card.textContent.toLowerCase().includes(kata) ? "" : "none";
+    });
+  });
+  document.querySelectorAll(".quiz").forEach((quiz, index) => {
+    quiz.querySelectorAll("button").forEach(tombol => tombol.addEventListener("click", function () {
+      const hasil = quiz.querySelector("p");
+      if (this.dataset.answer === "benar") {
+        hasil.textContent = "✅ Benar! " + (index === 0 ? "Mangrove umumnya tumbuh di wilayah pesisir." : "Mangrove membantu mengurangi energi gelombang.");
+      } else {
+        hasil.textContent = "❌ Belum tepat. Coba pilih jawaban lainnya!";
+      }
+    }));
+  });
+});
+</script>
+</body>
+</html>
